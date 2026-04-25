@@ -24,13 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="h-full overflow-auto">
+    <html lang="en" suppressHydrationWarning className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-full w-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} h-full w-full overflow-y-auto antialiased`}
       >
-        <TooltipProvider>
-          {children}
-        </TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );
