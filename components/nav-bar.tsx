@@ -6,6 +6,8 @@ export const NavBar = () => {
       <nav className="flex flex-row gap-4">
         <Link href="#home">Home</Link>
         <Link href="#about">About</Link>
+        <Link href="#projects">Projects</Link>
+        <Link href="#contact">Contact</Link>
       </nav>
     </div>
   );
