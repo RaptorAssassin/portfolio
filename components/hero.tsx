@@ -14,7 +14,7 @@ export const Hero = () => {
   ];
 
   return (
-    <section className="h-dvh w-full">
+    <section id="home" className="relative h-dvh w-full overflow-hidden">
       {/* animated background */}
       <div className="relative h-full w-full">
         <DarkVeil
@@ -52,7 +52,7 @@ export const Hero = () => {
               transition={{
                 layout: { type: 'spring', stiffness: 170, damping: 28 },
               }}
-              className="inline-flex w-fit rounded-md bg-(--accent)/80 p-1 px-2 text-2xl font-bold"
+              className="inline-flex h-fit w-fit rounded-md bg-(--accent)/80 p-1 px-2 text-2xl font-bold"
             >
               <RotatingText
                 texts={skills}
@@ -64,7 +64,7 @@ export const Hero = () => {
                 initial={{ y: '85%', opacity: 0 }}
                 animate={{ y: '0%', opacity: 1 }}
                 exit={{ y: '-85%', opacity: 0 }}
-                mainClassName="inline-flex overflow-hidden align-middle leading-none"
+                mainClassName="inline-flex overflow-hidden align-middle leading-relaxed m-auto"
               />
             </motion.div>
           </ScrollReveal>
@@ -96,7 +96,15 @@ export const Hero = () => {
           animate="visible"
           transition={{ delay: 1.0, duration: 0.5 }}
         >
-          <ArrowDown />
+          <button
+            onClick={() =>
+              document
+                .getElementById('about')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            }
+          >
+            <ArrowDown />
+          </button>
         </motion.div>
       </div>
     </section>

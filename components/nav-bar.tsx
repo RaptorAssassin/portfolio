@@ -2,9 +2,10 @@ import Link from 'next/link';
 
 export const NavBar = () => {
   return (
-    <div className="bg-accent/20 absolute top-5 left-1/2 -translate-x-1/2 rounded-full px-4 py-2 backdrop-blur-md">
-      <nav className="">
-        <Link href="#">Home</Link>
+    <div className="bg-accent/20 border-(foreground/30) absolute top-5 left-1/2 z-50 -translate-x-1/2 rounded-full border px-4 py-2 backdrop-blur-sm">
+      <nav className="flex flex-row gap-4">
+        <Link href="#home">Home</Link>
+        <Link href="#about">About</Link>
       </nav>
     </div>
   );
