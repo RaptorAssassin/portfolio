@@ -88,18 +88,7 @@ export const About = () => {
               <ScrollReveal delay={0.2}>
                 <p className="text-base leading-relaxed font-semibold md:text-lg">
                   Hello! I'm Karl Albrecht, 15 and currently based in Karlsruhe,
-                  Germany. Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Fuga suscipit cum dolores at excepturi quod ea libero,
-                  reiciendis a repellat tempore minima repudiandae ab ex
-                  corrupti vitae quibusdam, vel eligendi. Lorem ipsum dolor sit
-                  amet consectetur, adipisicing elit. Autem illo asperiores,
-                  consectetur quae at optio perferendis architecto. Fugit nam
-                  repellat, consequuntur odio iusto ex aperiam tempora veritatis
-                  ducimus, minima nostrum. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Fugiat ipsa nihil suscipit
-                  harum. Iure illo amet, mollitia sint enim totam, asperiores
-                  necessitatibus blanditiis sed voluptate nobis eum, cumque
-                  tempore beatae.
+                  Germany.
                 </p>
               </ScrollReveal>
             </div>
