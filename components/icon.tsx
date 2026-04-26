@@ -29,11 +29,12 @@ export default function Icon({
       <TooltipTrigger asChild>
         <span
           className={[
-            'relative isolate inline-block shrink-0 overflow-hidden rounded-md',
+            'relative isolate inline-block shrink-0 overflow-hidden rounded-md select-none',
             iconClassName,
           ]
             .filter(Boolean)
             .join(' ')}
+          draggable={false}
           style={{ width: size, height: size }}
         >
           <motion.div
@@ -47,6 +48,8 @@ export default function Icon({
               alt={alt}
               fill
               sizes={`${size}px`}
+              draggable={false}
+              onDragStart={(event) => event.preventDefault()}
               className="object-contain p-0.5"
             />
           </motion.div>

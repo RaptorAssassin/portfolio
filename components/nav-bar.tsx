@@ -61,8 +61,8 @@ export const NavBar = () => {
     ));
 
   const shellClasses = isOpen
-    ? 'bg-white/5 border-(foreground/30) absolute top-5 right-4 left-auto z-50 w-[calc(100vw-2rem)] max-w-2xl rounded-2xl border px-4 py-2 backdrop-blur-sm md:left-1/2 md:right-auto md:w-auto md:-translate-x-1/2 md:max-w-none md:rounded-full'
-    : 'absolute top-5 right-4 left-auto z-50 w-auto rounded-full border-0 bg-transparent px-0 py-0 backdrop-blur-none md:left-1/2 md:right-auto md:-translate-x-1/2 md:bg-white/5 md:border-(foreground/30) md:w-auto md:max-w-none md:rounded-full md:border md:px-4 md:py-2 md:backdrop-blur-sm';
+    ? 'bg-white/20 border-(foreground/30) absolute top-5 right-4 left-auto z-50 w-[calc(100vw-2rem)] max-w-2xl rounded-2xl border px-4 py-2 backdrop-blur-sm md:left-1/2 md:right-auto md:w-auto md:-translate-x-1/2 md:max-w-none md:rounded-full'
+    : 'absolute top-5 right-4 left-auto z-50 w-auto rounded-full border-0 bg-transparent px-0 py-0 backdrop-blur-none md:left-1/2 md:right-auto md:-translate-x-1/2 md:bg-white/20 md:border-(foreground/30) md:w-auto md:max-w-none md:rounded-full md:border md:px-4 md:py-2 md:backdrop-blur-sm';
 
   return (
     <div className={shellClasses}>

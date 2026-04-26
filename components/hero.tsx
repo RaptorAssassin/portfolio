@@ -52,7 +52,7 @@ export const Hero = () => {
               transition={{
                 layout: { type: 'spring', stiffness: 170, damping: 28 },
               }}
-              className="inline-flex h-fit w-fit rounded-md bg-(--accent)/80 p-1 px-2 text-2xl font-bold"
+              className="inline-flex h-fit w-fit rounded-md bg-(--accent)/80 p-2 px-3 text-2xl font-bold"
             >
               <RotatingText
                 texts={skills}
