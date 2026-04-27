@@ -1,10 +1,35 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Particles from './Particles';
 import Stack from './Stack';
 import { HobbyCard } from './hobby-card';
 import { ScrollReveal } from './scroll-reveal';
 import { ArrowRight } from 'lucide-react';
+
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [
+      shuffled[randomIndex],
+      shuffled[index],
+    ];
+  }
+
+  return shuffled;
+};
+
+const initialHobbies = [
+  { name: 'Coding', src: '/images/coding.jpg' },
+  { name: 'Gaming', src: '/images/gaming.jpg' },
+  { name: 'Cooking', src: '/images/cooking.jpg' },
+  { name: 'Playing the Trumpet', src: '/images/trumpet.jpg' },
+  //{ name: 'Dancing', src: '/images/dancing.jpg' },
+  { name: 'Working out', src: '/images/workout.jpg' },
+  { name: 'Traveling', src: '/images/traveling.jpg' },
+  { name: 'Meeting friends', src: '/images/friends.jpg' },
+];
 
 export const About = () => {
   const particlesLayerRef = useRef<HTMLDivElement>(null);
@@ -39,14 +64,11 @@ export const About = () => {
     );
   };
 
-  const hobbies = [
-    { name: 'Coding', src: '/images/coding.jpg' },
-    { name: 'Gaming', src: '/images/gaming.jpg' },
-    { name: 'Cooking', src: '/images/cooking.jpg' },
-    { name: 'Playing the Trumpet', src: '/images/trumpet.jpg' },
-    //{ name: 'Dancing', src: '/images/dancing.jpg' },
-    { name: 'Working out', src: '/images/workout.jpg' },
-  ];
+  const [hobbies, setHobbies] = useState(initialHobbies);
+
+  useEffect(() => {
+    setHobbies(shuffleArray(initialHobbies));
+  }, []);
 
   return (
     <section id="about" className="relative h-dvh w-full overflow-hidden">

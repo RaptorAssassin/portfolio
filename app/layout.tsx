@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+// @ts-ignore - CSS side-effect import
 import './globals.css';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
