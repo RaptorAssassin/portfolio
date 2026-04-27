@@ -1,39 +1,54 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Fallback wrapper when '@studio-freight/react-lenis' is not available.
-// This avoids a build-time error if the package isn't installed.
-const ReactLenis: React.FC<{
-  root?: any;
-  options?: any;
-  children?: React.ReactNode;
-}> = ({ children }) => <>{children}</>;
-
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ScrollSnapping({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  useEffect(() => {
-    const sections = gsap.utils.toArray('section');
+export default function ScrollSnapping({ children }: { children: React.ReactNode }) {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    ScrollTrigger.create({
-      snap: {
-        snapTo: 1 / (sections.length - 1),
-        duration: { min: 0.2, max: 0.8 },
-        delay: 0.1,
-        ease: 'power2.inOut',
-      },
-    });
+  // useLayoutEffect ist besser für Messungen vor dem Painting
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const sections = gsap.utils.toArray('section') as HTMLElement[];
+      
+      if (sections.length <= 1) return;
+
+      // Wir erstellen einen "Master" Trigger für das Snapping
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        snap: {
+          snapTo: 1 / (sections.length - 1), // Teilt den Scrollweg exakt in Sektionen
+          duration: { min: 0.2, max: 0.6 },
+          delay: 0.1,
+          ease: "power1.inOut"
+        }
+      });
+
+      // Optional: Animationen pro Sektion triggern
+      sections.forEach((section) => {
+        gsap.from(section.querySelectorAll(".animate-me"), {
+          opacity: 0,
+          y: 30,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: section,
+            start: "top center",
+            toggleActions: "play none none reverse"
+          }
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert(); // Räumt ALLES sauber auf (keine Memory Leaks)
   }, []);
 
   return (
-    <ReactLenis root options={{ lerp: 0.05, duration: 1.2 }}>
-      <main>{children}</main>
-    </ReactLenis>
+    <div ref={containerRef} className="relative">
+      {children}
+    </div>
   );
 }

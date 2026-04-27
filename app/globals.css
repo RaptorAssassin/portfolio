@@ -34,6 +34,13 @@ body {
   overscroll-behavior-y: contain;
 }
 
+main {
+  scroll-snap-type: y mandatory;
+  height: 100svh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 html,
 body {
   max-width: 100%;
@@ -44,11 +51,14 @@ body {
   scrollbar-gutter: auto;
 }
 
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;
 }
-
-/* removed scroll-snap behavior in favor of scripted smooth easing scrolling */

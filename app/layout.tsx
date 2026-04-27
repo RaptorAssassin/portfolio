@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from 'next/font/google';
 // @ts-ignore - CSS side-effect import
 import './globals.css';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import ScrollSnapping from '@/components/scroll-snapping';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,11 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-full w-full overflow-y-auto antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} h-full w-full overflow-y-hidden antialiased`}
       >
-        <TooltipProvider>
-          <ScrollSnapping>{children}</ScrollSnapping>
-        </TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );
