@@ -21,14 +21,14 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 const initialHobbies = [
-  { name: 'Coding', src: '/images/coding.jpg' },
-  { name: 'Gaming', src: '/images/gaming.jpg' },
-  { name: 'Cooking', src: '/images/cooking.jpg' },
-  { name: 'Playing the Trumpet', src: '/images/trumpet.jpg' },
-  //{ name: 'Dancing', src: '/images/dancing.jpg' },
-  { name: 'Working out', src: '/images/workout.jpg' },
-  { name: 'Traveling', src: '/images/traveling.jpg' },
-  { name: 'Meeting friends', src: '/images/friends.jpg' },
+  { name: 'Coding', src: '/images/hobbies/coding.jpg' },
+  { name: 'Gaming', src: '/images/hobbies/gaming.jpg' },
+  { name: 'Cooking', src: '/images/hobbies/cooking.jpg' },
+  { name: 'Playing the Trumpet', src: '/images/hobbies/trumpet.jpg' },
+  { name: 'Dancing', src: '/images/hobbies/dancing.jpg' },
+  { name: 'Working out', src: '/images/hobbies/workout.jpg' },
+  { name: 'Traveling', src: '/images/hobbies/traveling.jpg' },
+  { name: 'Meeting friends', src: '/images/hobbies/friends.jpg' },
 ];
 
 export const About = () => {
@@ -102,7 +102,7 @@ export const About = () => {
         <div className="flex w-full max-w-6xl flex-col items-center gap-8">
           {/* title */}
           <ScrollReveal>
-            <span className="text-5xl font-bold md:text-7xl">About me</span>
+            <h1 className="text-5xl font-bold md:text-7xl">About me</h1>
           </ScrollReveal>
           {/* left: about me text, right: hobby gallery */}
           <div className="mt-6 flex w-full flex-wrap items-start justify-center gap-8 lg:justify-between">

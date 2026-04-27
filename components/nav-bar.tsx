@@ -7,11 +7,17 @@ import Icon from './icon';
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', id: 'home' },
+    { name: 'About', id: 'about' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Learning Journey', id: 'learning-journey' },
+    { name: 'Contact', id: 'contact' },
   ];
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setIsOpen(false);
+  };
+
   const socialItems = [
     {
       href: 'https://github.com/RaptorAssassin',
@@ -31,12 +37,12 @@ export const NavBar = () => {
     },
   ];
 
-  const renderMenuLinks = (closeMenu?: boolean, mobile?: boolean) =>
+  const renderMenuLinks = (mobile?: boolean) =>
     menuItems.map((item) => (
-      <Link
+      <button
         key={item.name}
-        href={item.href}
-        onClick={closeMenu ? () => setIsOpen(false) : undefined}
+        type="button"
+        onClick={() => scrollToSection(item.id)}
         className={[
           'inline-flex items-center leading-none transition hover:opacity-80',
           mobile ? 'text-lg font-semibold sm:text-xl' : 'text-base',
@@ -45,7 +51,7 @@ export const NavBar = () => {
           .join(' ')}
       >
         {item.name}
-      </Link>
+      </button>
     ));
 
   const renderSocialLinks = (iconSize: number) =>
@@ -82,7 +88,7 @@ export const NavBar = () => {
         </div>
 
         <div className="hidden flex-row items-center gap-4 md:flex">
-          {renderMenuLinks(false, false)}
+          {renderMenuLinks(false)}
         </div>
 
         <div className="hidden h-4 w-px self-center bg-white md:block"></div>
@@ -96,9 +102,7 @@ export const NavBar = () => {
             id="mobile-nav-panel"
             className="flex flex-col gap-4 border-t border-white/15 pt-3 md:hidden"
           >
-            <div className="flex flex-col gap-3">
-              {renderMenuLinks(true, true)}
-            </div>
+            <div className="flex flex-col gap-3">{renderMenuLinks(true)}</div>
 
             <div className="h-px w-full bg-white/40"></div>
 

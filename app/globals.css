@@ -4,7 +4,7 @@
 :root {
   --background: #000000;
   --foreground: #ededed;
-  --accent: oklab(44.208% 0.14138 -0.17391);
+  --accent: #7701ad;
   --gradient-right: linear-gradient(to right, #a855f7, #6366f1, #3b82f6);
   --gradient-bottom: linear-gradient(to bottom, #a855f7, #6366f1, #3b82f6);
 }

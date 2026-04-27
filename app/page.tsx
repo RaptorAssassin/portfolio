@@ -4,6 +4,8 @@ import { About } from '@/components/about';
 import { Hero } from '@/components/hero';
 import { NavBar } from '@/components/nav-bar';
 import { Projects } from '@/components/projects';
+import { Contact } from '@/components/contact';
+import { LearningJourney } from '@/components/learning-journey';
 
 export default function Home() {
   useEffect(() => {
@@ -33,6 +35,8 @@ export default function Home() {
       <Hero />
       <About />
       <Projects />
+      <LearningJourney />
+      <Contact />
     </main>
   );
 }
