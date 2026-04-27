@@ -4,6 +4,7 @@ import Particles from './Particles';
 import Stack from './Stack';
 import { HobbyCard } from './hobby-card';
 import { ScrollReveal } from './scroll-reveal';
+import { ArrowRight } from 'lucide-react';
 
 export const About = () => {
   const particlesLayerRef = useRef<HTMLDivElement>(null);
@@ -42,8 +43,8 @@ export const About = () => {
     { name: 'Coding', src: '/images/coding.jpg' },
     { name: 'Gaming', src: '/images/gaming.jpg' },
     { name: 'Cooking', src: '/images/cooking.jpg' },
-    { name: 'Trumpet', src: '/images/trumpet.jpg' },
-    { name: 'Dancing', src: '/images/dancing.jpg' },
+    { name: 'Playing the Trumpet', src: '/images/trumpet.jpg' },
+    //{ name: 'Dancing', src: '/images/dancing.jpg' },
     { name: 'Working out', src: '/images/workout.jpg' },
   ];
 
@@ -87,25 +88,37 @@ export const About = () => {
             <div className="w-full max-w-2xl min-w-70 flex-1">
               <ScrollReveal delay={0.2}>
                 <p className="text-base leading-relaxed font-semibold md:text-lg">
-                  Hello! I'm Karl Albrecht, 15 and currently based in Karlsruhe,
-                  Germany.
+                  Welcome to my portfolio! I'm{' '}
+                  <span className="font-extrabold">Karl</span>, 15 and currently
+                  based in Karlsruhe, Germany. I'm a software developer
+                  currently focusing on full-stack web development with{' '}
+                  <span className="font-extrabold">React</span> and{' '}
+                  <span className="font-extrabold">Nextjs</span>. I also enjoy
+                  learning{' '}
+                  <span className="font-extrabold">
+                    data structures and algorithms(DSA)
+                  </span>
+                  .
                 </p>
               </ScrollReveal>
             </div>
             {/* hobby gallery */}
             <div className="w-full max-w-130 min-w-70 flex-1 self-start">
               <ScrollReveal delay={0.4}>
-                <div className="-mt-4 aspect-square w-full max-w-130">
-                  <Stack
-                    autoplay={true}
-                    autoplayDelay={5000}
-                    pauseOnHover={true}
-                    cards={hobbies.map((hobby) => (
-                      <div key={hobby.name} className="pointer-events-none">
-                        <HobbyCard name={hobby.name} src={hobby.src} />
-                      </div>
-                    ))}
-                  ></Stack>
+                <div className="flex flex-col items-center gap-4">
+                  <div className="text-4xl font-extrabold">My Hobbies:</div>
+                  <div className="-mt-4 aspect-square w-full max-w-130">
+                    <Stack
+                      autoplay={true}
+                      autoplayDelay={5000}
+                      pauseOnHover={true}
+                      cards={hobbies.map((hobby) => (
+                        <div key={hobby.name} className="pointer-events-none">
+                          <HobbyCard name={hobby.name} src={hobby.src} />
+                        </div>
+                      ))}
+                    ></Stack>
+                  </div>
                 </div>
               </ScrollReveal>
             </div>
