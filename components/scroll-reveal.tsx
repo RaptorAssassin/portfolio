@@ -23,7 +23,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       }}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
+      viewport={{ once: true, amount: 0.25 }}
       transition={{ duration, delay, ease: 'easeOut' }}
       style={{ willChange: 'transform, opacity, filter' }}
     >

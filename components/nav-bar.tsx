@@ -13,8 +13,15 @@ export const NavBar = () => {
     { name: 'Learning Journey', id: 'learning-journey' },
     { name: 'Contact', id: 'contact' },
   ];
+
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    if (el)
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
     setIsOpen(false);
   };
 
