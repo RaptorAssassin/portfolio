@@ -190,5 +190,7 @@ export default function DarkVeil({
     warpAmount,
     resolutionScale,
   ]);
-  return <canvas ref={ref} className="block h-full w-full" />;
+  return (
+    <canvas ref={ref} className="pointer-events-none block h-full w-full" />
+  );
 }
