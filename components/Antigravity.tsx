@@ -35,9 +35,9 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   depthFactor = 1,
   pulseSpeed = 3,
   particleShape = 'capsule',
-  fieldStrength = 10
+  fieldStrength = 10,
 }) => {
-  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const meshRef = useRef<any>(null);
   const { viewport } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -80,19 +80,22 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
         vx: 0,
         vy: 0,
         vz: 0,
-        randomRadiusOffset
+        randomRadiusOffset,
       });
     }
     return temp;
   }, [count, viewport.width, viewport.height]);
 
-  useFrame(state => {
+  useFrame((state) => {
     const mesh = meshRef.current;
     if (!mesh) return;
 
     const { viewport: v, pointer: m } = state;
 
-    const mouseDist = Math.sqrt(Math.pow(m.x - lastMousePos.current.x, 2) + Math.pow(m.y - lastMousePos.current.y, 2));
+    const mouseDist = Math.sqrt(
+      Math.pow(m.x - lastMousePos.current.x, 2) +
+        Math.pow(m.y - lastMousePos.current.y, 2),
+    );
 
     if (mouseDist > 0.001) {
       lastMouseMoveTime.current = Date.now();
@@ -142,7 +145,8 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
 
         targetPos.x = projectedTargetX + currentRingRadius * Math.cos(angle);
         targetPos.y = projectedTargetY + currentRingRadius * Math.sin(angle);
-        targetPos.z = mz * depthFactor + Math.sin(t) * (1 * waveAmplitude * depthFactor);
+        targetPos.z =
+          mz * depthFactor + Math.sin(t) * (1 * waveAmplitude * depthFactor);
       }
 
       particle.cx += (targetPos.x - particle.cx) * lerpSpeed;
@@ -155,7 +159,8 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
       dummy.rotateX(Math.PI / 2);
 
       const currentDistToMouse = Math.sqrt(
-        Math.pow(particle.cx - projectedTargetX, 2) + Math.pow(particle.cy - projectedTargetY, 2)
+        Math.pow(particle.cx - projectedTargetX, 2) +
+          Math.pow(particle.cy - projectedTargetY, 2),
       );
 
       const distFromRing = Math.abs(currentDistToMouse - ringRadius);
@@ -163,7 +168,10 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
 
       scaleFactor = Math.max(0, Math.min(1, scaleFactor));
 
-      const finalScale = scaleFactor * (0.8 + Math.sin(t * pulseSpeed) * 0.2 * particleVariance) * particleSize;
+      const finalScale =
+        scaleFactor *
+        (0.8 + Math.sin(t * pulseSpeed) * 0.2 * particleVariance) *
+        particleSize;
       dummy.scale.set(finalScale, finalScale, finalScale);
 
       dummy.updateMatrix();
@@ -176,7 +184,9 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
 
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
-      {particleShape === 'capsule' && <capsuleGeometry args={[0.1, 0.4, 4, 8]} />}
+      {particleShape === 'capsule' && (
+        <capsuleGeometry args={[0.1, 0.4, 4, 8]} />
+      )}
       {particleShape === 'sphere' && <sphereGeometry args={[0.2, 16, 16]} />}
       {particleShape === 'box' && <boxGeometry args={[0.3, 0.3, 0.3]} />}
       {particleShape === 'tetrahedron' && <tetrahedronGeometry args={[0.3]} />}
@@ -185,7 +195,7 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   );
 };
 
-const Antigravity: React.FC<AntigravityProps> = props => {
+const Antigravity: React.FC<AntigravityProps> = (props) => {
   return (
     <Canvas camera={{ position: [0, 0, 50], fov: 35 }}>
       <AntigravityInner {...props} />
