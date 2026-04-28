@@ -16,7 +16,7 @@ export const Hero = () => {
   return (
     <section id="home" className="relative h-dvh w-full overflow-hidden">
       {/* animated background */}
-      <div className="relative h-full w-full">
+      <div className="pointer-events-none relative h-full w-full">
         <DarkVeil
           hueShiftFrom={-60}
           hueShiftTo={-20}
@@ -30,7 +30,7 @@ export const Hero = () => {
         />
       </div>
       {/* content */}
-      <div className="w-80vw absolute inset-0 m-auto flex flex-col items-center justify-center gap-8">
+      <div className="w-80vw pointer-events-auto absolute inset-0 z-10 m-auto flex flex-col items-center justify-center gap-8 select-text">
         {/* greeting */}
         <div className="align-center flex flex-col justify-center gap-2">
           <div className="mx-auto">
@@ -89,7 +89,7 @@ export const Hero = () => {
         </div>
       </div>
       {/* scroll indicator */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+      <div className="pointer-events-auto absolute bottom-5 left-1/2 z-10 -translate-x-1/2">
         <motion.div
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           initial="hidden"

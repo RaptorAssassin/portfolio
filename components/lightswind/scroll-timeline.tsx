@@ -1,15 +1,16 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
+'use client';
+import React, { useState, useEffect, useRef, type RefObject } from 'react';
+import Link from 'next/link';
 import {
   motion,
   useScroll,
   useTransform,
   useSpring,
   MotionValue,
-} from "framer-motion";
-import { cn } from "../../lib/utils";
-import { Card, CardContent } from "./card";
-import { Calendar } from "lucide-react";
+} from 'framer-motion';
+import { cn } from '../../lib/utils';
+import { Card, CardContent } from './card';
+import { Calendar } from 'lucide-react';
 
 export interface TimelineEvent {
   id?: string;
@@ -17,6 +18,10 @@ export interface TimelineEvent {
   title: string;
   subtitle?: string;
   description: string;
+  link?: {
+    href: string;
+    label: string;
+  };
   icon?: React.ReactNode;
   color?: string;
 }
@@ -25,76 +30,79 @@ export interface ScrollTimelineProps {
   events: TimelineEvent[];
   title?: string;
   subtitle?: string;
-  animationOrder?: "sequential" | "staggered" | "simultaneous";
-  cardAlignment?: "alternating" | "left" | "right";
+  animationOrder?: 'sequential' | 'staggered' | 'simultaneous';
+  cardAlignment?: 'alternating' | 'left' | 'right';
   lineColor?: string;
   activeColor?: string;
   progressIndicator?: boolean;
-  cardVariant?: "default" | "elevated" | "outlined" | "filled";
-  cardEffect?: "none" | "glow" | "shadow" | "bounce";
+  cardVariant?: 'default' | 'elevated' | 'outlined' | 'filled';
+  cardEffect?: 'none' | 'glow' | 'shadow' | 'bounce';
   parallaxIntensity?: number;
   progressLineWidth?: number;
-  progressLineCap?: "round" | "square";
-  dateFormat?: "text" | "badge";
+  progressLineCap?: 'round' | 'square';
+  dateFormat?: 'text' | 'badge';
   className?: string;
-  revealAnimation?: "fade" | "slide" | "scale" | "flip" | "none";
-  connectorStyle?: "dots" | "line" | "dashed";
+  revealAnimation?: 'fade' | 'slide' | 'scale' | 'flip' | 'none';
+  connectorStyle?: 'dots' | 'line' | 'dashed';
   perspective?: boolean;
   darkMode?: boolean;
   smoothScroll?: boolean;
+  scrollContainerRef?: RefObject<HTMLElement | null>;
 }
 
 const DEFAULT_EVENTS: TimelineEvent[] = [
   {
-    year: "2023",
-    title: "Major Achievement",
-    subtitle: "Organization Name",
+    year: '2023',
+    title: 'Major Achievement',
+    subtitle: 'Organization Name',
     description:
-      "Description of the achievement or milestone reached during this time period.",
+      'Description of the achievement or milestone reached during this time period.',
   },
   {
-    year: "2022",
-    title: "Important Milestone",
-    subtitle: "Organization Name",
-    description: "Details about this significant milestone and its impact.",
+    year: '2022',
+    title: 'Important Milestone',
+    subtitle: 'Organization Name',
+    description: 'Details about this significant milestone and its impact.',
   },
   {
-    year: "2021",
-    title: "Key Event",
-    subtitle: "Organization Name",
-    description: "Information about this key event in the timeline.",
+    year: '2021',
+    title: 'Key Event',
+    subtitle: 'Organization Name',
+    description: 'Information about this key event in the timeline.',
   },
 ];
 
 export const ScrollTimeline = ({
   events = DEFAULT_EVENTS,
-  title = "Timeline",
-  subtitle = "Scroll to explore the journey",
-  animationOrder = "sequential",
-  cardAlignment = "alternating",
-  lineColor = "bg-primary/30",
-  activeColor = "bg-primary",
+  title = 'Timeline',
+  subtitle = 'Scroll to explore the journey',
+  animationOrder = 'sequential',
+  cardAlignment = 'alternating',
+  lineColor = 'bg-primary/30',
+  activeColor = 'bg-primary',
   progressIndicator = true,
-  cardVariant = "default",
-  cardEffect = "none",
+  cardVariant = 'default',
+  cardEffect = 'none',
   parallaxIntensity = 0.2,
   progressLineWidth = 2,
-  progressLineCap = "round",
-  dateFormat = "badge",
-  revealAnimation = "fade",
-  className = "",
-  connectorStyle = "line",
+  progressLineCap = 'round',
+  dateFormat = 'badge',
+  revealAnimation = 'fade',
+  className = '',
+  connectorStyle = 'line',
   perspective = false,
   darkMode = false,
   smoothScroll = true,
+  scrollContainerRef,
 }: ScrollTimelineProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
   const timelineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const { scrollYProgress } = useScroll({
+    container: scrollContainerRef,
     target: scrollRef,
-    offset: ["start start", "end end"],
+    offset: ['start start', 'end end'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
@@ -103,7 +111,7 @@ export const ScrollTimeline = ({
     restDelta: 0.001,
   });
 
-  const progressHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  const progressHeight = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((v) => {
@@ -121,23 +129,23 @@ export const ScrollTimeline = ({
 
   const getCardVariants = (index: number) => {
     const baseDelay =
-      animationOrder === "simultaneous"
+      animationOrder === 'simultaneous'
         ? 0
-        : animationOrder === "staggered"
-        ? index * 0.2
-        : index * 0.3;
+        : animationOrder === 'staggered'
+          ? index * 0.2
+          : index * 0.3;
 
     const initialStates = {
       fade: { opacity: 0, y: 20 },
       slide: {
         x:
-          cardAlignment === "left"
+          cardAlignment === 'left'
             ? -100
-            : cardAlignment === "right"
-            ? 100
-            : index % 2 === 0
-            ? -100
-            : 100,
+            : cardAlignment === 'right'
+              ? 100
+              : index % 2 === 0
+                ? -100
+                : 100,
         opacity: 0,
       },
       scale: { scale: 0.8, opacity: 0 },
@@ -159,63 +167,63 @@ export const ScrollTimeline = ({
           ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
         },
       },
-      viewport: { once: false, margin: "-100px" },
+      viewport: { once: false, margin: '-100px' },
     };
   };
 
   const getConnectorClasses = () => {
     const baseClasses = cn(
-      "absolute left-1/2 transform -translate-x-1/2",
-      lineColor
+      'absolute left-1/2 transform -translate-x-1/2',
+      lineColor,
     );
     const widthStyle = `w-[${progressLineWidth}px]`;
     switch (connectorStyle) {
-      case "dots":
-        return cn(baseClasses, "w-1 rounded-full");
-      case "dashed":
+      case 'dots':
+        return cn(baseClasses, 'w-1 rounded-full');
+      case 'dashed':
         return cn(
           baseClasses,
           widthStyle,
-          `[mask-image:linear-gradient(to_bottom,black_33%,transparent_33%,transparent_66%,black_66%)] [mask-size:1px_12px]`
+          `[mask-image:linear-gradient(to_bottom,black_33%,transparent_33%,transparent_66%,black_66%)] [mask-size:1px_12px]`,
         );
-      case "line":
+      case 'line':
       default:
         return cn(baseClasses, widthStyle);
     }
   };
 
   const getCardClasses = (index: number) => {
-    const baseClasses = "relative z-30 rounded-lg transition-all duration-300";
+    const baseClasses = 'relative z-30 rounded-lg transition-all duration-300';
     const variantClasses = {
-      default: "bg-card border shadow-sm",
-      elevated: "bg-card border border-border/40 shadow-md",
-      outlined: "bg-card/50 backdrop-blur border-2 border-primary/20",
-      filled: "bg-primary/10 border border-primary/30",
+      default: 'bg-card border shadow-sm',
+      elevated: 'bg-card border border-border/40 shadow-md',
+      outlined: 'bg-card/50 backdrop-blur border-2 border-primary/20',
+      filled: 'bg-primary/10 border border-primary/30',
     };
     const effectClasses = {
-      none: "",
-      glow: "hover:shadow-[0_0_15px_rgba(var(--primary-rgb)/0.5)]",
-      shadow: "hover:shadow-lg hover:-translate-y-1",
-      bounce: "hover:scale-[1.03] hover:shadow-md active:scale-[0.97]",
+      none: '',
+      glow: 'hover:shadow-[0_0_15px_rgba(var(--primary-rgb)/0.5)]',
+      shadow: 'hover:shadow-lg hover:-translate-y-1',
+      bounce: 'hover:scale-[1.03] hover:shadow-md active:scale-[0.97]',
     };
     const alignmentClassesDesktop =
-      cardAlignment === "alternating"
+      cardAlignment === 'alternating'
         ? index % 2 === 0
-          ? "lg:mr-[calc(50%+20px)]"
-          : "lg:ml-[calc(50%+20px)]"
-        : cardAlignment === "left"
-        ? "lg:mr-auto lg:ml-0"
-        : "lg:ml-auto lg:mr-0";
+          ? 'lg:mr-[calc(50%+20px)]'
+          : 'lg:ml-[calc(50%+20px)]'
+        : cardAlignment === 'left'
+          ? 'lg:mr-auto lg:ml-0'
+          : 'lg:ml-auto lg:mr-0';
     const perspectiveClass = perspective
-      ? "transform transition-transform hover:rotate-y-1 hover:rotate-x-1"
-      : "";
+      ? 'transform transition-transform hover:rotate-y-1 hover:rotate-x-1'
+      : '';
 
     return cn(
       baseClasses,
       variantClasses[cardVariant],
       effectClasses[cardEffect],
       alignmentClassesDesktop,
-      "w-full lg:w-[calc(50%-40px)]"
+      'w-full lg:w-[calc(50%-40px)]',
     );
   };
 
@@ -223,23 +231,28 @@ export const ScrollTimeline = ({
     <div
       ref={scrollRef}
       className={cn(
-        "relative min-h-screen w-full overflow-hidden",
-        darkMode ? "bg-background text-foreground" : "",
-        className
+        'relative min-h-screen w-full overflow-hidden',
+        darkMode ? 'bg-background text-foreground' : '',
+        className,
       )}
     >
-      <div className="text-center py-16 px-4">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4">{title}</h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="px-4 py-16 text-center">
+        <h2 className="mb-4 text-3xl font-bold md:text-5xl">{title}</h2>
+        <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
           {subtitle}
         </p>
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 pb-24">
+      <div className="relative mx-auto max-w-6xl px-4 pb-24">
         <div className="relative mx-auto">
           <div
-            className={cn(getConnectorClasses(), "h-full absolute top-0 z-10")}
-          ></div>
+            className={cn(
+              getConnectorClasses(),
+              'pointer-events-none absolute inset-y-0 left-1/2 z-10 -translate-x-1/2 overflow-visible',
+            )}
+          >
+            <div className="absolute inset-y-0 left-1/2 w-0.75 -translate-x-1/2 rounded-full bg-white/10" />
+          </div>
 
           {/* === MODIFICATION START === */}
           {/* Enhanced Progress Indicator with Traveling Glow */}
@@ -247,14 +260,11 @@ export const ScrollTimeline = ({
             <>
               {/* The main filled progress line */}
               <motion.div
-                className="absolute top-0 z-10"
+                className="pointer-events-none absolute inset-y-0 left-1/2 z-10 w-0.75 origin-top -translate-x-1/2 rounded-full"
                 style={{
-                  height: progressHeight,
-                  width: progressLineWidth,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  borderRadius:
-                    progressLineCap === "round" ? "9999px" : "0px",
+                  scaleY: smoothProgress,
+                  transformOrigin: 'top',
+                  borderRadius: progressLineCap === 'round' ? '9999px' : '0px',
                   background: `linear-gradient(to bottom, #22d3ee, #6366f1, #a855f7)`,
                   // Enhanced shadow for a constant glow effect along the path
                   boxShadow: `
@@ -265,19 +275,16 @@ export const ScrollTimeline = ({
               />
               {/* The traveling glow "comet" at the head of the line */}
               <motion.div
-                className="absolute z-20"
+                className="pointer-events-none absolute left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
                 style={{
                   top: progressHeight,
-                  left: "50%",
-                  translateX: "-50%",
-                  translateY: "-50%", // Center the comet on the line's end point
                 }}
               >
                 <motion.div
-                  className="w-5 h-5 rounded-full" // Size of the comet core
+                  className="h-5 w-5 rounded-full" // Size of the comet core
                   style={{
                     background:
-                      "radial-gradient(circle, rgba(168,85,247,0.8) 0%, rgba(99,102,241,0.5) 40%, rgba(34,211,238,0) 70%)",
+                      'radial-gradient(circle, rgba(168,85,247,0.8) 0%, rgba(99,102,241,0.5) 40%, rgba(34,211,238,0) 70%)',
                     // Intense, layered glow effect for the comet
                     boxShadow: `
                       0 0 15px 4px rgba(168, 85, 247, 0.6),
@@ -291,7 +298,7 @@ export const ScrollTimeline = ({
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   }}
                 />
               </motion.div>
@@ -304,7 +311,7 @@ export const ScrollTimeline = ({
               const yOffset = useTransform(
                 smoothProgress,
                 [0, 1],
-                [parallaxIntensity * 100, -parallaxIntensity * 100]
+                [parallaxIntensity * 100, -parallaxIntensity * 100],
               );
               return (
                 <div
@@ -313,38 +320,38 @@ export const ScrollTimeline = ({
                     timelineRefs.current[index] = el;
                   }}
                   className={cn(
-                    "relative flex items-center mb-20 py-4",
-                    "flex-col lg:flex-row",
-                    cardAlignment === "alternating"
+                    'relative mb-20 flex items-center py-4',
+                    'flex-col lg:flex-row',
+                    cardAlignment === 'alternating'
                       ? index % 2 === 0
-                        ? "lg:justify-start"
-                        : "lg:flex-row-reverse lg:justify-start"
-                      : cardAlignment === "left"
-                      ? "lg:justify-start"
-                      : "lg:flex-row-reverse lg:justify-start"
+                        ? 'lg:justify-start'
+                        : 'lg:flex-row-reverse lg:justify-start'
+                      : cardAlignment === 'left'
+                        ? 'lg:justify-start'
+                        : 'lg:flex-row-reverse lg:justify-start',
                   )}
                 >
                   <div
                     className={cn(
-                      "absolute top-1/2 transform -translate-y-1/2 z-30",
-                      "left-1/2 -translate-x-1/2"
+                      'absolute top-1/2 z-30 -translate-y-1/2 transform',
+                      'left-1/2 -translate-x-1/2',
                     )}
                   >
                     <motion.div
                       className={cn(
-                        "w-6 h-6 rounded-full border-4 bg-background flex items-center justify-center",
+                        'bg-background flex h-6 w-6 items-center justify-center rounded-full border-4',
                         index <= activeIndex
-                          ? "border-primary"
-                          : "border bg-card"
+                          ? 'border-primary'
+                          : 'bg-card border',
                       )}
                       animate={
                         index <= activeIndex
                           ? {
                               scale: [1, 1.3, 1],
                               boxShadow: [
-                                "0 0 0px rgba(99,102,241,0)",
-                                "0 0 12px rgba(99,102,241,0.6)",
-                                "0 0 0px rgba(99,102,241,0)",
+                                '0 0 0px rgba(99,102,241,0)',
+                                '0 0 12px rgba(99,102,241,0.6)',
+                                '0 0 0px rgba(99,102,241,0)',
                               ],
                             }
                           : {}
@@ -353,55 +360,70 @@ export const ScrollTimeline = ({
                         duration: 0.8,
                         repeat: Infinity,
                         repeatDelay: 4,
-                        ease: "easeInOut",
+                        ease: 'easeInOut',
                       }}
                     />
                   </div>
                   <motion.div
-                    className={cn(
-                      getCardClasses(index),
-                      "mt-12 lg:mt-0"
-                    )}
+                    className={cn(getCardClasses(index), 'mt-12 lg:mt-0')}
                     variants={getCardVariants(index)}
                     initial="initial"
                     whileInView="whileInView"
-                    viewport={{ once: false, margin: "-100px" }}
+                    viewport={{ once: false, margin: '-100px' }}
                     style={parallaxIntensity > 0 ? { y: yOffset } : undefined}
                   >
                     <Card className="bg-background border">
                       <CardContent className="p-6">
-                        {dateFormat === "badge" ? (
-                          <div className="flex items-center mb-2">
+                        {dateFormat === 'badge' ? (
+                          <div className="mb-2 flex items-center">
                             {event.icon || (
-                              <Calendar className="h-4 w-4 mr-2 text-primary" />
+                              <Calendar className="text-primary mr-2 h-4 w-4" />
                             )}
                             <span
                               className={cn(
-                                "text-sm font-bold",
+                                'text-sm font-bold',
                                 event.color
                                   ? `text-${event.color}`
-                                  : "text-primary"
+                                  : 'text-primary',
                               )}
                             >
                               {event.year}
                             </span>
                           </div>
                         ) : (
-                          <p className="text-lg font-bold text-primary mb-2">
+                          <p className="text-primary mb-2 text-lg font-bold">
                             {event.year}
                           </p>
                         )}
-                        <h3 className="text-xl font-bold mb-1">
+                        <h3 className="mb-1 text-xl font-bold">
                           {event.title}
                         </h3>
                         {event.subtitle && (
-                          <p className="text-muted-foreground font-medium mb-2">
+                          <p className="text-muted-foreground mb-2 font-medium">
                             {event.subtitle}
                           </p>
                         )}
                         <p className="text-muted-foreground">
                           {event.description}
                         </p>
+                        {event.link ? (
+                          <Link
+                            href={event.link.href}
+                            target={
+                              event.link.href.startsWith('http')
+                                ? '_blank'
+                                : undefined
+                            }
+                            rel={
+                              event.link.href.startsWith('http')
+                                ? 'noreferrer'
+                                : undefined
+                            }
+                            className="border-primary/30 bg-primary/10 text-primary hover:bg-primary/15 mt-4 inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-medium transition"
+                          >
+                            {event.link.label}
+                          </Link>
+                        ) : null}
                       </CardContent>
                     </Card>
                   </motion.div>
