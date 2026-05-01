@@ -33,7 +33,7 @@ export const NavBar = () => {
     },
     { href: 'https://x.com/raptor_dev_', tooltip: 'X', src: '/icons/x.svg' },
     {
-      href: 'https://www.linkedin.com/in/karl-albrecht-6a1059379/',
+      href: 'https://www.linkedin.com/in/karl-albrecht/',
       tooltip: 'LinkedIn',
       src: '/icons/linkedin.svg',
     },

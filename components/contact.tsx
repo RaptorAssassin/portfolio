@@ -56,7 +56,7 @@ export const Contact = () => {
   const socialLinks: SocialLink[] = [
     {
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/karl-albrecht-6a1059379/',
+      href: 'https://www.linkedin.com/in/karl-albrecht/',
       icon: '/icons/linkedin.svg',
     },
     { name: 'X', href: 'https://x.com/raptor_dev_', icon: '/icons/x.svg' },
@@ -127,7 +127,7 @@ export const Contact = () => {
             </ScrollReveal>
           </div>
           {/* social links */}
-          <div className="flex max-w-2xl flex-row items-center justify-center gap-6 mt-4">
+          <div className="mt-4 flex max-w-2xl flex-row items-center justify-center gap-6">
             {socialLinks.map((link, index) => (
               <ScrollReveal key={index} delay={0.2 + index * 0.1}>
                 <Icon
