@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
 
-## Getting Started
+## <a href="https://karl-albrecht.vercel.app/">Visit</a>
+<br>
+This is my personal portfolio website. It showcases my hobbies, projects and learning journey.
 
-First, run the development server:
+<div align="center">
+  <img width="1920" height="912" alt="screely-raptor-20260531-213738" src="https://github.com/user-attachments/assets/5ebca5c8-93f4-400e-b337-ebdc1ab97f1f" />
+  
+  *The portfolio's hero section*
+</div>
 
+# Tech Stack
+THis site was built using **Next.js** and **React**.
+For styling, I used **Tailwind CSS**.
+
+# Deployment
+This site is hosted on the **Vercel free plan**, on the domain "karl-albrecht.vercel.app".
+
+# Getting Started
+
+## Prerequisites
+Ensure you have the following installed:
+- **Node.js** 20.x or higher ([Download](https://nodejs.org/))
+- **npm**, **yarn**, **pnpm**, or **bun**
+
+## Installation
+
+1. Clone this repository
+  ```bash
+  git clone https://github.com/RaptorAssassin/portfolio.git
+  cd portfolio
+  ```
+
+2. Install dependencies
+  ```bash
+  npm install
+  # or
+  yarn install
+  # or
+  pnpm install
+  ```
+
+## Running locally
+Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the site.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Why did I build this?
+I always needed a personal portfolio to present my work and also personal stuff like my hobbies. After learning React/Next.js, I decided to use that and some cool components to create a portfolio site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Challenges
+- Getting the interactivity on both the backgrounds and the foreground working, for example for these hobby cards + star background reacting to mouse movements
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Acknowledgements
+Thanks to [Reactbits](https://reactbits.dev) for the useful react components, like the animated/interactive backgrounds.
