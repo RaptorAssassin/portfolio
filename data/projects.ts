@@ -9,11 +9,13 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: 'Portfolio Website',
+    name: 'Image Optimizer',
     description:
-      'A modern portfolio website built with Next.js, React and Tailwind CSS.',
-    image: '/images/projects/portfolio.jpg',
-    techstack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+      'A web application for compressing and optimizing images for faster loading times and improved performance.',
+    image: '/images/projects/image-optimizer.jpg',
+    techstack: ['Next.js', 'React', 'Node.js', 'TypeScript', 'Tailwind CSS'],
+    demoLink: 'https://image-optimizer-online.vercel.app/',
+    repoLink: 'https://github.com/raptorassassin/image-optimizer',
   },
   {
     name: 'Snippet Vault',
@@ -29,5 +31,13 @@ export const projects: Project[] = [
       'Supabase',
     ],
     demoLink: 'https://snippet-vault-app.vercel.app/',
+  },
+  {
+    name: 'Portfolio Website',
+    description:
+      'A modern portfolio website built with Next.js, React and Tailwind CSS.',
+    image: '/images/projects/portfolio.jpg',
+    techstack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    repoLink: 'https://github.com/raptorassassin/portfolio',
   },
 ];
