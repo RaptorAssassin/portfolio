@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Antigravity from './Antigravity';
 import { ScrollReveal } from './scroll-reveal';
 import Icon from './icon';
+import { links } from '../data/links';
 
 export const Contact = () => {
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -56,20 +57,20 @@ export const Contact = () => {
   const socialLinks: SocialLink[] = [
     {
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/karl-albrecht/',
+      href: links.linkedin,
       icon: '/icons/linkedin.svg',
     },
-    { name: 'X', href: 'https://x.com/raptor_dev_', icon: '/icons/x.svg' },
+    { name: 'X', href: links.x, icon: '/icons/x.svg' },
     {
       name: 'Email',
-      href: 'mailto:karl.b.albrecht@gmail.com',
+      href: `mailto:${links.mail}`,
       icon: '/icons/email.svg',
     },
-    {
-      name: 'GitHub',
-      href: 'https://github.com/RaptorAssassin',
-      icon: '/icons/github.svg',
-    },
+    // {
+    //   name: 'GitHub',
+    //   href: links.github,
+    //   icon: '/icons/github.svg',
+    // },
   ];
 
   return (

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import Icon from './icon';
+import { links } from '../data/links';
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,18 +28,18 @@ export const NavBar = () => {
 
   const socialItems = [
     {
-      href: 'https://github.com/RaptorAssassin',
+      href: links.github,
       tooltip: 'GitHub',
       src: '/icons/github.svg',
     },
-    { href: 'https://x.com/raptor_dev_', tooltip: 'X', src: '/icons/x.svg' },
+    { href: links.x, tooltip: 'X', src: '/icons/x.svg' },
     {
-      href: 'https://www.linkedin.com/in/karl-albrecht/',
+      href: links.linkedin,
       tooltip: 'LinkedIn',
       src: '/icons/linkedin.svg',
     },
     {
-      href: 'https://leetcode.com/u/RaptorDev/',
+      href: links.leetcode,
       tooltip: 'LeetCode',
       src: '/icons/leetcode.svg',
     },
